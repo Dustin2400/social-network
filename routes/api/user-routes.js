@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const res = require('express/lib/response');
 const { User } = require('../../models');
 
 router.get('/', (req, res) => {
@@ -75,5 +74,15 @@ router.post('/:userId/friends/:friendId', ({ params }, res) => {
     })
     .catch(err => res.json(err))
 });
+
+router.delete('/:userId/friends/:friendId', ({ params }, res) => {
+    User.findOneAndUpdate(
+        {_id: params.userId },
+        { $pull: { friends: params.friendId } },
+        { new: true }
+    )
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => res.json(err));
+})
 
 module.exports = router;

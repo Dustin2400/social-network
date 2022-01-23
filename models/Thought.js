@@ -14,12 +14,12 @@ const ReactionSchema = new Schema(
         },
         username: {
             type: String,
-            required: trusted,
-            createdAt: {
-                type: Date,
-                default: Date.now,
-                get: createdAtVal => dateFormat(createdAtVal)
-            }
+            required: 'username required.',
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,                
+            get: createdAtVal => dateFormat(createdAtVal)
         }
     }
 )
